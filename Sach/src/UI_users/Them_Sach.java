@@ -51,7 +51,7 @@ public class Them_Sach extends javax.swing.JFrame {
         jPanel1.setToolTipText("");
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Tên Sách");
+        jLabel1.setText("Tiêu Đề");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel2.setText("Tác Giả");
