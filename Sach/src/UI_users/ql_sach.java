@@ -12,26 +12,29 @@ public class ql_sach {
     int STT;
     String Tieu_De, Tac_Gia, ISBN, The_Loai;
     int Nam_Sang_Tac;
+    int So_Luong;
 
     public ql_sach(){
         
     }
     
-    public ql_sach(int STT, String Tieu_De, String Tac_Gia, String ISBN, String The_Loai, int Nam_Sang_Tac) {
+    public ql_sach(int STT, String Tieu_De, String Tac_Gia, String ISBN, String The_Loai, int Nam_Sang_Tac, int So_Luong) {
         this.STT = STT;
         this.Tieu_De = Tieu_De;
         this.Tac_Gia = Tac_Gia;
         this.ISBN = ISBN;
         this.The_Loai = The_Loai;
         this.Nam_Sang_Tac = Nam_Sang_Tac;
+        this.So_Luong = So_Luong;
     }
 
-    public ql_sach(String Tieu_De, String Tac_Gia, String ISBN, String The_Loai, int Nam_Sang_Tac) {
+    public ql_sach(String Tieu_De, String Tac_Gia, String ISBN, String The_Loai, int Nam_Sang_Tac, int So_Luong) {
         this.Tieu_De = Tieu_De;
         this.Tac_Gia = Tac_Gia;
         this.ISBN = ISBN;
         this.The_Loai = The_Loai;
         this.Nam_Sang_Tac = Nam_Sang_Tac;
+        this.So_Luong = So_Luong;
     }
 
     public int getSTT() {
@@ -82,5 +85,14 @@ public class ql_sach {
         this.Nam_Sang_Tac = Nam_Sang_Tac;
     }
     
+    public int getSo_Luong() {
+        return So_Luong;
+    }
+
+    public void setSo_Luong(int So_Luong) {
+        this.So_Luong = So_Luong;
+    }
     
 }
+
+
