@@ -249,8 +249,8 @@
                 <Column editable="false" title="Ti&#xea;u &#x110;&#x1ec1;" type="java.lang.Object"/>
                 <Column editable="false" title="T&#xe1;c Gi&#x1ea3;" type="java.lang.Object"/>
                 <Column editable="false" title="ISBN" type="java.lang.Object"/>
-                <Column editable="false" title="N&#x103;m Xu&#x1ea5;t B&#x1ea3;n" type="java.lang.Object"/>
                 <Column editable="false" title="Th&#x1ec3; Lo&#x1ea1;i" type="java.lang.Object"/>
+                <Column editable="false" title="N&#x103;m Xu&#x1ea5;t B&#x1ea3;n" type="java.lang.Object"/>
                 <Column editable="false" title="S&#x1ed1; L&#x1b0;&#x1ee3;ng" type="java.lang.Object"/>
               </Table>
             </Property>

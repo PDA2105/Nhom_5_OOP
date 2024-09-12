@@ -4,15 +4,15 @@
  */
 package UI_users;
 
-import java.util.List;
-import java.sql.DriverManager;
 import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.sql.Statement;
-import java.sql.ResultSet;
 
 public class LibraryModify {
 
@@ -33,8 +33,8 @@ public class LibraryModify {
                     resultSet.getString("Tiêu Đề"),
                     resultSet.getString("Tác Giả"),
                     resultSet.getString("ISBN"),
-                    resultSet.getInt("Năm Sáng Tác"),                        
-                    resultSet.getString("Thể Loại"),
+                    resultSet.getString("Thể Loại"),                        
+                    resultSet.getInt("Năm Sáng Tác"),
                     resultSet.getInt("Số Lượng"));
                 libraryList.add(book);
             }

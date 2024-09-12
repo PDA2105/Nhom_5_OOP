@@ -162,7 +162,7 @@ public class Them_Sach extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null}
             },
             new String [] {
-                "STT", "Tiêu Đề", "Tác Giả", "ISBN", "Năm Xuất Bản", "Thể Loại", "Số Lượng"
+                "STT", "Tiêu Đề", "Tác Giả", "ISBN", "Thể Loại", "Năm Xuất Bản", "Số Lượng"
             }
         ) {
             boolean[] canEdit = new boolean [] {
