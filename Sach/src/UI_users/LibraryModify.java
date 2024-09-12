@@ -6,6 +6,7 @@ package UI_users;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -58,6 +59,119 @@ public class LibraryModify {
         }
         return libraryList;
     }
-}
 
+    public static void Insert(ql_sach std){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            // lay tat ca danh sach sv
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "");
+            // gia tri tra ve danh sach
+            String sql = "INSERT INTO ql_sach(Tiêu Đề, Tác Giả, ISBN, Thể Loại, Năm Sáng Tác, Số Lượng) values(?, ?, ?, ?, ?, ?)";
+            statement = connection.prepareCall(sql);
+            
+            statement.setString(1, std.getTieu_De());
+            statement.setString(2, std.getTac_Gia());
+            statement.setString(3, std.getISBN());
+            statement.setString(4, std.getThe_Loai());
+            statement.setInt(5, std.getNam_Sang_Tac());
+            statement.setInt(6, std.getSo_Luong());
+            
+            statement.execute();           
+        } catch (SQLException ex) {
+            Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+
+    public static void UpDate(ql_sach std){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            // lay tat ca danh sach sv
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "");
+            // gia tri tra ve danh sach
+            String sql = "UPDATE ql_sach SET(Tiêu Đề=?, Tác Giả=?, ISBN=?, Thể Loại=?, Năm Sáng Tác=?, Số Lượng=? where STT=?)";
+            statement = connection.prepareCall(sql);
+            
+            statement.setString(1, std.getTieu_De());
+            statement.setString(2, std.getTac_Gia());
+            statement.setString(3, std.getISBN());
+            statement.setString(4, std.getThe_Loai());
+            statement.setInt(5, std.getNam_Sang_Tac());
+            statement.setInt(6, std.getSo_Luong());
+            statement.setInt(7, std.getSTT());
+
+            
+            statement.execute();           
+        } catch (SQLException ex) {
+            Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+    
+        public static void Delete(int STT){
+        Connection connection = null;
+        PreparedStatement statement = null;
+        
+        try {
+            // lay tat ca danh sach sv
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "");
+            // gia tri tra ve danh sach
+            String sql = "DELETE FROM ql_sach where STT=?)";
+            statement = connection.prepareCall(sql);
+            statement.setInt(1,STT);
+            
+            statement.execute();           
+        } catch (SQLException ex) {
+            Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+    }
+     
+}
 

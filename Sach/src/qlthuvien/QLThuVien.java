@@ -4,10 +4,7 @@
  */
 package qlthuvien;
 
-/**
- *
- * @author duyan
- */
+
 public class QLThuVien {
 
     /**
