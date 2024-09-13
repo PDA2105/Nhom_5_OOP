@@ -8,30 +8,36 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 public class Them_Sach extends javax.swing.JFrame {
+
     DefaultTableModel tableModel;
-    /**
-     * Creates new form Them_Sach
-     */
+
     public Them_Sach() {
         initComponents();
+        
         tableModel = (DefaultTableModel) tblLibrary.getModel();
+        
+        showLibrary();
     }
     
-    private void showLibrary(){
+    
+    
+    private void showLibrary() {
         List<ql_sach> List_sach = LibraryModify.findALL();
-        
+
         tableModel.setRowCount(0);
-        for (ql_sach libraryList : List_sach){
-            tableModel.addRow(new Object[] {tableModel.getRowCount() + 1, 
-                                            ql_sach.getTieu_De(),
-                                            ql_sach.getTac_Gia(),
-                                            ql_sach.getISBN(),
-                                            ql_sach.getThe_Loai(),
-                                            ql_sach.getNam_Sang_Tac(),
-                                            ql_sach.getSo_Luong()
+        
+        List_sach.forEach((libraryList) -> {
+            tableModel.addRow(new Object[]{tableModel.getRowCount() + 1,
+                libraryList.getTieu_De(),
+                libraryList.getTac_Gia(),
+                libraryList.getISBN(),
+                libraryList.getThe_Loai(),
+                libraryList.getNam_Sang_Tac(),
+                libraryList.getSo_Luong()
             });
-        }
+        });
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -84,6 +90,11 @@ public class Them_Sach extends javax.swing.JFrame {
         btnSave.setText("Save");
 
         btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
 
         btnDelete.setText("Delete");
 
@@ -200,20 +211,26 @@ public class Them_Sach extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 229, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        txtTieu_De.setText("");
+       
+    }//GEN-LAST:event_btnResetActionPerformed
 
     /**
      * @param args the command line arguments
