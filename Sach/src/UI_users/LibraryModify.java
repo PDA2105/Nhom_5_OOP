@@ -23,9 +23,9 @@ public class LibraryModify {
         Statement statement = null;
         try {
             // lay tat ca danh sach sv
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "SELECT * FROM ql_sach ORDER BY Tieu_De,So_Luong";
+            String sql = "SELECT * FROM ql_sach ";
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
