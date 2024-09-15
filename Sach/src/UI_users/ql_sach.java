@@ -7,29 +7,29 @@ package UI_users;
 public class  ql_sach {
     int STT;
     String Tieu_De, Tac_Gia, ISBN, The_Loai;
-    int Nam_Sang_Tac;
+    int Nam_Xuat_Ban;
     int So_Luong;
 
     public ql_sach(){
         
     }
     
-    public ql_sach(int STT, String Tieu_De, String Tac_Gia, String ISBN, String The_Loai, int Nam_Sang_Tac, int So_Luong) {
+    public ql_sach(String Tieu_De, String Tac_Gia, String ISBN, String The_Loai, int STT, int Nam_Xuat_Ban, int So_Luong) {
         this.STT = STT;
         this.Tieu_De = Tieu_De;
         this.Tac_Gia = Tac_Gia;
         this.ISBN = ISBN;
         this.The_Loai = The_Loai;
-        this.Nam_Sang_Tac = Nam_Sang_Tac;
+        this.Nam_Xuat_Ban = Nam_Xuat_Ban;
         this.So_Luong = So_Luong;
     }
 
-    public ql_sach(String Tieu_De, String Tac_Gia, String ISBN, String The_Loai, int Nam_Sang_Tac, int So_Luong) {
+    public ql_sach(String Tieu_De,String Tac_Gia,String ISBN, String The_Loai, int Nam_Xuat_Ban, int So_Luong) {
         this.Tieu_De = Tieu_De;
         this.Tac_Gia = Tac_Gia;
         this.ISBN = ISBN;
         this.The_Loai = The_Loai;
-        this.Nam_Sang_Tac = Nam_Sang_Tac;
+        this.Nam_Xuat_Ban = Nam_Xuat_Ban;
         this.So_Luong = So_Luong;
     }
 
@@ -73,12 +73,12 @@ public class  ql_sach {
         this.The_Loai = The_Loai;
     }
 
-    public int getNam_Sang_Tac() {
-        return Nam_Sang_Tac;
+    public int getNam_Xuat_Ban() {
+        return Nam_Xuat_Ban;
     }
 
-    public void setNam_Sang_Tac(int Nam_Sang_Tac) {
-        this.Nam_Sang_Tac = Nam_Sang_Tac;
+    public void setNam_Xuat_Ban(int Nam_Xuat_Ban) {
+        this.Nam_Xuat_Ban = Nam_Xuat_Ban;
     }
     
     public int getSo_Luong() {
@@ -88,7 +88,7 @@ public class  ql_sach {
     public void setSo_Luong(int So_Luong) {
         this.So_Luong = So_Luong;
     }
-    
+
 }
 
 

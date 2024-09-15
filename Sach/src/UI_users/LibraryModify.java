@@ -30,13 +30,15 @@ public class LibraryModify {
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
                 ql_sach book = new ql_sach(
-                    resultSet.getInt("STT"),
+                        
                     resultSet.getString("Tiêu Đề"),
                     resultSet.getString("Tác Giả"),
                     resultSet.getString("ISBN"),
-                    resultSet.getString("Thể Loại"),                        
-                    resultSet.getInt("Năm Sáng Tác"),
-                    resultSet.getInt("Số Lượng"));
+                    resultSet.getString("Thể Loại"),
+                    resultSet.getInt("STT"),
+                    resultSet.getInt("Năm Xuất Bản"),
+                    resultSet.getInt("Số Lượng")
+                );
                 libraryList.add(book);
             }
         } catch (SQLException ex) {
@@ -66,16 +68,16 @@ public class LibraryModify {
         
         try {
             // lay tat ca danh sach sv
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "INSERT INTO ql_sach(Tiêu Đề, Tác Giả, ISBN, Thể Loại, Năm Sáng Tác, Số Lượng) values(?, ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO ql_sach(Tiêu Đề, Tác Giả, ISBN, Thể Loại, Năm Xuất Bản, Số Lượng) values(?, ?, ?, ?, ?, ?)";
             statement = connection.prepareCall(sql);
             
             statement.setString(1, std.getTieu_De());
             statement.setString(2, std.getTac_Gia());
             statement.setString(3, std.getISBN());
             statement.setString(4, std.getThe_Loai());
-            statement.setInt(5, std.getNam_Sang_Tac());
+            statement.setInt(5, std.getNam_Xuat_Ban());
             statement.setInt(6, std.getSo_Luong());
             
             statement.execute();           
@@ -105,16 +107,16 @@ public class LibraryModify {
         
         try {
             // lay tat ca danh sach sv
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "UPDATE ql_sach SET(Tiêu Đề=?, Tác Giả=?, ISBN=?, Thể Loại=?, Năm Sáng Tác=?, Số Lượng=? where STT=?)";
+            String sql = "UPDATE ql_sach SET(Tiêu Đề=?, Tác Giả=?, ISBN=?, Thể Loại=?, Năm Xuất Bản=?, Số Lượng=? where STT=?)";
             statement = connection.prepareCall(sql);
             
             statement.setString(1, std.getTieu_De());
             statement.setString(2, std.getTac_Gia());
             statement.setString(3, std.getISBN());
             statement.setString(4, std.getThe_Loai());
-            statement.setInt(5, std.getNam_Sang_Tac());
+            statement.setInt(5, std.getNam_Xuat_Ban());
             statement.setInt(6, std.getSo_Luong());
             statement.setInt(7, std.getSTT());
 
@@ -146,9 +148,9 @@ public class LibraryModify {
         
         try {
             // lay tat ca danh sach sv
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "DELETE FROM ql_sach where STT=?)";
+            String sql = "DELETE FROM ql_sach (where STT=?)";
             statement = connection.prepareCall(sql);
             statement.setInt(1,STT);
             
@@ -172,6 +174,7 @@ public class LibraryModify {
             }
         }
     }
+
      
 }
 
