@@ -70,8 +70,8 @@ public class LibraryModify {
             // lay tat ca danh sach sv
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "INSERT INTO ql_sach(Tiêu Đề, Tác Giả, ISBN, Thể Loại, Năm Xuất Bản, Số Lượng) values(?, ?, ?, ?, ?, ?)";
-            statement = connection.prepareCall(sql);
+           String sql = " INSERT INTO `library_management`.`ql_sach` (`Tiêu Đề`, `Tác Giả`, `ISBN`, `Thể Loại`, `Năm Xuất Bản`, `Số Lượng`) VALUES (?, ?, ?, ?, ?, ?)";
+           statement = connection.prepareStatement(sql);
             
             statement.setString(1, std.getTieu_De());
             statement.setString(2, std.getTac_Gia());
@@ -109,8 +109,8 @@ public class LibraryModify {
             // lay tat ca danh sach sv
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "UPDATE ql_sach SET(Tiêu Đề=?, Tác Giả=?, ISBN=?, Thể Loại=?, Năm Xuất Bản=?, Số Lượng=? where STT=?)";
-            statement = connection.prepareCall(sql);
+            String sql = "UPDATE ql_sach SET 'Tiêu Đề'=?, 'Tác Giả'=?, 'ISBN'=?, 'Thể Loại'=?, 'Năm Xuất Bản'=?, 'Số Lượng'=? where 'STT'=?";
+            statement = connection.prepareStatement(sql);
             
             statement.setString(1, std.getTieu_De());
             statement.setString(2, std.getTac_Gia());
@@ -150,8 +150,8 @@ public class LibraryModify {
             // lay tat ca danh sach sv
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "DELETE FROM ql_sach (where STT=?)";
-            statement = connection.prepareCall(sql);
+            String sql = "DELETE FROM ql_sach where STT=?";
+            statement = connection.prepareStatement(sql);
             statement.setInt(1,STT);
             
             statement.execute();           
@@ -174,6 +174,53 @@ public class LibraryModify {
             }
         }
     }
+    
+    public static List<ql_sach> find_Sach(String Tieu_De) {
+        List<ql_sach> libraryList = new ArrayList<>();
+        Connection connection = null;
+        PreparedStatement statement = null;
+        try {
+            // lay tat ca danh sach sv
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
+            // gia tri tra ve danh sach
+            String sql = "SELECT * FROM ql_sach WHERE `Tiêu Đề` LIKE ?";
+            statement = connection.prepareStatement(sql);
+            statement.setString(1, "%"+ Tieu_De + "%");
+            ResultSet resultSet = statement.executeQuery();
+            while (resultSet.next()) {
+                ql_sach book = new ql_sach(
+                        
+                    resultSet.getString("Tiêu Đề"),
+                    resultSet.getString("Tác Giả"),
+                    resultSet.getString("ISBN"),
+                    resultSet.getString("Thể Loại"),
+                    resultSet.getInt("STT"),
+                    resultSet.getInt("Năm Xuất Bản"),
+                    resultSet.getInt("Số Lượng")
+                );
+                libraryList.add(book);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            if (statement != null) {
+                try {
+                    statement.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if (connection != null) {
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(LibraryModify.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        return libraryList;
+    }
+
 
      
 }
