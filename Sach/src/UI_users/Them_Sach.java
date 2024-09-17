@@ -25,7 +25,7 @@ public class Them_Sach extends javax.swing.JFrame {
     }
 
     private void showLibrary() {
-        List_sach = LibraryModify.findALL();
+        List_sach = LibraryModify.Connect();
 
         tableModel.setRowCount(0);
 
@@ -73,8 +73,10 @@ public class Them_Sach extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Them_Sach");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Nhập Thông Tin Sách", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
+        jPanel1.setBackground(new java.awt.Color(204, 255, 204));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "LIBRARY BOOK", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Segoe UI", 0, 14))); // NOI18N
         jPanel1.setToolTipText("");
+        jPanel1.setName(""); // NOI18N
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel1.setText("Tiêu Đề");
@@ -91,6 +93,7 @@ public class Them_Sach extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Thể Loại");
 
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/diskette.png"))); // NOI18N
         btnSave.setText("Save");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -98,6 +101,7 @@ public class Them_Sach extends javax.swing.JFrame {
             }
         });
 
+        btnReset.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/arrows.png"))); // NOI18N
         btnReset.setText("Reset");
         btnReset.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -105,6 +109,7 @@ public class Them_Sach extends javax.swing.JFrame {
             }
         });
 
+        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/trash.png"))); // NOI18N
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -112,7 +117,9 @@ public class Them_Sach extends javax.swing.JFrame {
             }
         });
 
+        btnFind.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ICON/find.png"))); // NOI18N
         btnFind.setText("Find");
+        btnFind.setToolTipText("");
         btnFind.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnFindActionPerformed(evt);
@@ -133,7 +140,7 @@ public class Them_Sach extends javax.swing.JFrame {
                         .addComponent(btnSave)
                         .addGap(60, 60, 60)
                         .addComponent(btnReset)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
                         .addComponent(btnDelete)
                         .addGap(54, 54, 54)
                         .addComponent(btnFind))
@@ -250,6 +257,8 @@ public class Them_Sach extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
+        jPanel1.getAccessibleContext().setAccessibleName("LIBRARY BOOK");
+
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
@@ -294,23 +303,58 @@ public class Them_Sach extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnFindActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFindActionPerformed
-        String input = JOptionPane.showInputDialog(this, "Nhập Tên Sách Bạn Muốn Tìm:");
-        if(input != null && input.length()>0){
-            List_sach = LibraryModify.find_Sach(input);
-            tableModel.setRowCount(0);
-            List_sach.forEach((libraryList) -> {
-                tableModel.addRow(new Object[]{tableModel.getRowCount() + 1,
-                    libraryList.getTieu_De(),
-                    libraryList.getTac_Gia(),
-                    libraryList.getISBN(),
-                    libraryList.getThe_Loai(),
-                    libraryList.getNam_Xuat_Ban(),
-                    libraryList.getSo_Luong()
+        // Định nghĩa các tùy chọn tìm kiếm
+        String[] options = {"Tiêu Đề", "ISBN", "Tên"};
+
+        // Hiển thị hộp thoại để chọn phương pháp tìm kiếm
+        String searchOption = (String) JOptionPane.showInputDialog(this, 
+                "Bạn Cần Tìm Kiếm Qua Cách Nào:", 
+                "Tìm Kiếm", 
+                JOptionPane.QUESTION_MESSAGE, 
+                null, 
+                options, 
+                options[0]);
+
+        if (searchOption != null) { // Đảm bảo có lựa chọn được chọn
+            String input = null;
+
+            // Dựa trên lựa chọn của người dùng, yêu cầu họ nhập thông tin cần tìm
+            if (searchOption.equals("Tiêu Đề")) {
+                input = JOptionPane.showInputDialog(this, "Nhập Tên Sách Bạn Tìm Kiếm:");
+                if (input != null && input.length() > 0) {
+                    List_sach = LibraryModify.find_Sach(input);
+                }
+            } else if (searchOption.equals("ISBN")) {
+                input = JOptionPane.showInputDialog(this, "Nhập ISBN:");
+                if (input != null && input.length() > 0) {
+                    List_sach = LibraryModify.find_ISBN(input);
+                }
+            } else if (searchOption.equals("Tên")) {
+                input = JOptionPane.showInputDialog(this, "Nhập Tên:");
+                if (input != null && input.length() > 0) {
+                    List_sach = LibraryModify.find_Ten(input);
+                }
+            }
+
+            // Cập nhật bảng nếu có kết quả tìm kiếm
+            if (List_sach != null && !List_sach.isEmpty()) {
+                tableModel.setRowCount(0); // Xóa bảng
+                List_sach.forEach((libraryList) -> {
+                    tableModel.addRow(new Object[]{tableModel.getRowCount() + 1,
+                        libraryList.getTieu_De(),
+                        libraryList.getTac_Gia(),
+                        libraryList.getISBN(),
+                        libraryList.getThe_Loai(),
+                        libraryList.getNam_Xuat_Ban(),
+                        libraryList.getSo_Luong()
+                    });
                 });
-        });
-            
-        }else{
-            showLibrary();  }
+            } else {
+                // Nếu không có kết quả tìm kiếm hoặc không có đầu vào, hiển thị toàn bộ thư viện
+                showLibrary(); 
+            }
+        }
+        
     }//GEN-LAST:event_btnFindActionPerformed
 
     /**
