@@ -369,7 +369,38 @@ public class Them_Sach extends javax.swing.JFrame {
     }//GEN-LAST:event_btnFindActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
-        // TODO add your handling code here:
+        int selectedIndex = tblLibrary.getSelectedRow();
+    
+        if (selectedIndex >= 0) {
+            ql_sach std = List_sach.get(selectedIndex);
+
+            txtTieu_De.setText(std.getTieu_De());
+            txtTac_Gia.setText(std.getTac_Gia());
+            txtISBN.setText(std.getISBN());
+            txtThe_Loai.setText(std.getThe_Loai());
+            txtNam_Xuat_Ban.setText(String.valueOf(std.getNam_Xuat_Ban()));
+            txtSo_Luong.setText(String.valueOf(std.getSo_Luong()));
+
+            int option = JOptionPane.showConfirmDialog(this, "Bạn muốn cập nhật sách này?");
+
+            if (option == JOptionPane.YES_OPTION) {
+                std.setTieu_De(txtTieu_De.getText());
+                std.setTac_Gia(txtTac_Gia.getText());
+                std.setISBN(txtISBN.getText());
+                std.setThe_Loai(txtThe_Loai.getText());
+                std.setNam_Xuat_Ban(Integer.parseInt(txtNam_Xuat_Ban.getText()));
+                std.setSo_Luong(Integer.parseInt(txtSo_Luong.getText()));
+
+                
+                LibraryModify.UpDate(std);
+                LibraryModify.Delete(std.getSTT());
+                
+                showLibrary();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Vui lòng chọn sách để cập nhật.");
+        }
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     /**
