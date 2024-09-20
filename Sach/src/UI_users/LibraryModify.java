@@ -25,7 +25,7 @@ public class LibraryModify {
             // lay tat ca danh sach sv
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "SELECT * FROM ql_sach ";
+            String sql = "SELECT * FROM ql_sach ORDER BY `Tiêu Đề`, `Tác Giả`";
             statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(sql);
             while (resultSet.next()) {
@@ -150,7 +150,7 @@ public class LibraryModify {
             // lay tat ca danh sach sv
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "DELETE FROM ql_sach where STT=?";
+            String sql = "DELETE FROM ql_sach where STT=? ";
             statement = connection.prepareStatement(sql);
             statement.setInt(1,STT);
             
@@ -183,7 +183,7 @@ public class LibraryModify {
             // lay tat ca danh sach sv
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "SELECT * FROM ql_sach WHERE `Tiêu Đề` LIKE ?";
+            String sql = "SELECT * FROM ql_sach WHERE `Tiêu Đề` LIKE ? ORDER BY `Tiêu Đề`, `Tác Giả`";
             statement = connection.prepareStatement(sql);
             statement.setString(1, "%"+ Tieu_De + "%");
             ResultSet resultSet = statement.executeQuery();
@@ -229,7 +229,7 @@ public class LibraryModify {
             // lay tat ca danh sach sv
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "SELECT * FROM ql_sach WHERE `ISBN` LIKE ?";
+            String sql = "SELECT * FROM ql_sach WHERE `ISBN` LIKE ? ORDER BY `Tiêu Đề`, `Tác Giả`";
             statement = connection.prepareStatement(sql);
             statement.setString(1, "%"+ ISBN + "%");
             ResultSet resultSet = statement.executeQuery();
@@ -275,7 +275,7 @@ public class LibraryModify {
             // lay tat ca danh sach sv
             connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/library_management", "root", "Nhom5123456");
             // gia tri tra ve danh sach
-            String sql = "SELECT * FROM ql_sach WHERE `Tác Giả` LIKE ?";
+            String sql = "SELECT * FROM ql_sach WHERE `Tác Giả` LIKE ? ORDER BY `Tiêu Đề`, `Tác Giả`";
             statement = connection.prepareStatement(sql);
             statement.setString(1, "%"+ Tac_Gia + "%");
             ResultSet resultSet = statement.executeQuery();
